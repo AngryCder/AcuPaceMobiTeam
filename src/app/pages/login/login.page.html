@@ -9,20 +9,29 @@
       <img src="assets/images/logo.png" class="smallLogo"/>
       <h1>Sign In</h1>
     </div>
-  <form>
-    <ion-list>
+    <form [formGroup]="loginForm"> 
+      <ion-list> 
       <ion-item>
         <ion-label position="stacked">Username</ion-label>
-        <ion-input autocomplete="off" type="text" name="username" [(ngModel)]="postData.username"></ion-input>
-      </ion-item>
+        <ion-input formControlName="mobileno" autocomplete="off" type="tel" name="mobileno" ></ion-input>
+      </ion-item> 
+      <!-- [(ngModel)]="postData.mobileno" --> 
+      <div class="noborder" no-lines
+        *ngIf="!loginForm.controls.mobileno.valid && (loginForm.controls.mobileno.dirty || submitAttempt)">
+        <p text-left text-wrap class="error">Please enter the mobileno</p>
+      </div>
 
       <ion-item>
         <ion-label position="stacked">Password</ion-label>
-        <ion-input autocomplete="off" type="password" name="password" [(ngModel)]="postData.password"></ion-input>
-      </ion-item>
+        <ion-input autocomplete="off" formControlName="password" type="password" name="password" ></ion-input>
+        <!-- [(ngModel)]="postData.password" -->
+      </ion-item> 
+      <div class="noborder" no-lines
+      *ngIf="!loginForm.controls.password.valid && (loginForm.controls.password.dirty || submitAttempt)">
+     </div>
 
       <ion-item lines='none'>
-        <a routerLink='/signup'>Create Account</a>
+        <a routerLink='/signup'>Create Account</a> 
       </ion-item>
     </ion-list>
     <ion-button expand="block" share="round" color="success" (click)="loginAction()">Login</ion-button>

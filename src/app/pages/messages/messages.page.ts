@@ -15,7 +15,7 @@ export class MessagesPage implements OnInit {
  Channel_name: String 
  remoteCalls: any = [];
   @ViewChild('agora_local',{static: false}) private element : ElementRef;
-
+  @ViewChild('remote_calls',{static: false}) private container : ElementRef;
   // Add
   constructor(
     private agoraService: AngularAgoraRtcService,    private renderer: Renderer2
@@ -92,6 +92,7 @@ export class MessagesPage implements OnInit {
         console.log(`${evt.uid} left from this channel`);
       }
     });
+    this.adjust()
   }
 
 
@@ -102,11 +103,20 @@ export class MessagesPage implements OnInit {
       console.log("Leave channel failed");
     });
        console.log("hello");
-    console.log(this.remoteCalls);
     for (let child of this.element.nativeElement.children) {
   this.renderer.removeChild(this.element.nativeElement, child);
 }
-  }
+    console.log(this.remoteCalls);
+}
+
+
+adjust(){
+  this.renderer.setStyle(this.container.nativeElement,"position","absolute");
+  this.renderer.setStyle(this.element.nativeElement,"position","absolute");
+ this.renderer.setStyle(this.container.nativeElement,"z-index","1");
+  this.renderer.setStyle(this.element.nativeElement,"z-index","2");
+}
+
   ngOnInit() {
   }
 

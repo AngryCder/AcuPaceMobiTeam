@@ -4,9 +4,10 @@
 
 export const environment = {
   production: true,
-  apiUrl: 'https://api.thewallscript.com/restful/'
-};
+  apiUrl: 'http://acupace.co.in/videoconfwebservice/'
 
+};
+   
 
 /*
  * For easier debugging in development mode, you can import the following file

@@ -6,28 +6,38 @@
 
 <ion-content padding='true'>
   <div class="center">
-    <img src="assets/images/logo.png" class="smallLogo"/>
+    <img src="assets/images/logo.png" class="smallLogo"/> 
     <h1>Create Account</h1>
   </div>
-  <form>
+  <form padding text-center [formGroup]="registerForm">  
     <ion-list>
         <ion-item>
             <ion-label position="stacked">Name</ion-label>
-            <ion-input autocomplete="off" name="name" type="text" [(ngModel)]="postData.name"></ion-input>
-          </ion-item>
-      <ion-item>
-        <ion-label position="stacked">Email</ion-label>
-        <ion-input autocomplete="off" name="email" type="email" [(ngModel)]="postData.email"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="stacked">Username</ion-label>
-        <ion-input autocomplete="off" name="username" type="text" [(ngModel)]="postData.username"></ion-input>
-      </ion-item>
+            <!-- [(ngModel)]="postData.name" -->
+            <ion-input autocomplete="off" formControlName="name" name="name" type="text" ></ion-input>
+          </ion-item> 
+          <div class="noborder" no-lines
+          *ngIf="!registerForm.controls.name.valid && (registerForm.controls.name.dirty || submitAttempt)">
+          <p text-left text-wrap class="error">Please enter the Name</p>
+        </div>
 
       <ion-item>
-        <ion-label position="stacked">Password</ion-label>
-        <ion-input autocomplete="off" name="password" type="password" [(ngModel)]="postData.password"></ion-input>
+        <ion-label position="stacked">Email</ion-label>
+        <ion-input autocomplete="off" formControlName="email" name="email" type="email"></ion-input>
       </ion-item>
+      <div class="noborder" no-lines
+      *ngIf="!registerForm.controls.email.valid && (registerForm.controls.email.dirty || submitAttempt)">
+      <p text-left text-wrap class="error">Please enter a valid email</p>
+    </div>
+      
+      <ion-item>
+        <ion-label position="stacked">Mobile No</ion-label>
+        <ion-input autocomplete="off" name="mobile" formControlName="mobile" type="tel" ></ion-input>
+      </ion-item> 
+      <div class="noborder" no-lines
+      *ngIf="!registerForm.controls.mobile.valid && (registerForm.controls.mobile.dirty || submitAttempt)">
+      <p text-left text-wrap class="error">Please enter 10 digit Mobile No.</p>
+    </div>
 
       <ion-item lines='none'>
         Already have an account? <a routerLink='/login'>Sign in.</a>

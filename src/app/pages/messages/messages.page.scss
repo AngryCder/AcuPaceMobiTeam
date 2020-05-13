@@ -1,15 +1,24 @@
 #agora_local{
-    height: 500px;
-    width: 500px;
+    height: 100px;
+    width: 100px;
     float: left;
+    position:absolute;
     margin-left: auto;
   margin-right: auto;
+  z-index:2;
 }
 
 .remote-containers div{
     height: 500px;
     width: 500px;
+    position :relative;
     float:left; /* add this */
-    margin-left: auto;
-  margin-right: auto;
+    margin-left: 170;
+    margin-top:300;
+    margin-right: auto;
+    z-index:1
+}
+
+.input{
+    margin-top:400px;
 }

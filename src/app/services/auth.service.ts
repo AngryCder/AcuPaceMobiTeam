@@ -21,15 +21,19 @@ export class AuthService {
     this.storageService.get(AuthConstants.AUTH).then(res => {
       this.userData$.next(res);
     });
-  }
+  } 
 
-  login(postData: any): Observable<any> {
-    return this.httpService.post('login', postData);
+  login(postData: any): Observable<any> { 
+    return this.httpService.post('login.php', postData);
   }
 
   signup(postData: any): Observable<any> {
-    return this.httpService.post('signup', postData);
-  }
+    return this.httpService.post('registration.php', postData);
+  }  
+
+  //myprofile.php update_user.php //upload.php
+
+
 
   logout() {
     this.storageService.clear();
