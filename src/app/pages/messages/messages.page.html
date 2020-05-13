@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Messages</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+	<div #agora_local id="agora_local" >
+</div>
+<div class="remote-containers">
+  <div class="remote_calls" *ngFor="let remote of remoteCalls;" [id]="remote">
+  </div>
+</div>
+<ion-input autocomplete="off" type="text" name="chanelname" [(ngModel)]="Channel_name"></ion-input>
+<ion-button (click)="startCall()">Start Call</ion-button>
+<ion-button (click)="leave()">End Call</ion-button>
+
+
+</ion-content>
