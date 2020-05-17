@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AngularAgoraRtcService, Stream } from 'angular-agora-rtc';
 import { AfterViewInit, ElementRef, ViewChild } from '@angular/core';
 import {Renderer2} from '@angular/core';
-
+import { CountdownModule } from "ngx-countdown";
 
 @Component({
   selector: 'app-messages',

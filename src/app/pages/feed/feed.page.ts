@@ -11,6 +11,8 @@ import { ToastService } from './../../services/toast.service';
 export class FeedPage implements OnInit {
   public authUser: any;
 
+  public page_name = "Feed";
+
   postData = {
     user_id: '',
     token: ''

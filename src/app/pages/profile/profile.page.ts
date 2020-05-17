@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FeedService } from 'src/app/services/feed.service';
 import { AuthService } from './../../services/auth.service';
 import { ToastService } from './../../services/toast.service';
-import { AuthConstants } from '../../config/auth-constants';
 import { StorageService } from './../../services/storage.service';
 
 @Component({

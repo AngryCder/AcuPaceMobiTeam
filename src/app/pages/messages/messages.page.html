@@ -5,15 +5,39 @@
 </ion-header>
 
 <ion-content>
-	<div #agora_local id="agora_local" >
-</div>
-<div class="remote-containers">
-  <div #remote_calls class="remote_calls" *ngFor="let remote of remoteCalls;" [id]="remote">
+  <div ng-app="stopwatch">
+    <div class="timesetter" ng-controller="timeController as times">
+      <h2>Call End In</h2>
+      <countdown
+        #cd
+        [config]="{ leftTime:2400,demand:true}"
+        (event)="handleEvent($event)"
+      ></countdown>
+    </div>
   </div>
-</div>
-<ion-input autocomplete="off" type="text" name="chanelname" [(ngModel)]="Channel_name"></ion-input>
-<ion-button (click)="startCall()">Start Call</ion-button>
-<ion-button (click)="leave()">End Call</ion-button>
 
+  <div #agora_local id="agora_local"></div>
 
+  <div class="remote-containers">
+    <div
+      class="remote_calls"
+      *ngFor="let remote of remoteCalls;"
+      [id]="remote"
+    ></div>
+  </div>
+  <ion-input
+    class="input"
+    autocomplete="off"
+    type="text"
+    name="chanelname"
+    [(ngModel)]="Channel_name"
+  ></ion-input>
+
+  <ion-button (click)="startCall()" (click)="cd.resume()" color="dark"
+    >start Call
+  </ion-button>
+
+  <ion-button (click)="leave()" (click)="cd.stop()" color="dark"
+    >End Call</ion-button
+  >
 </ion-content>

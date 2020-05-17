@@ -5,5 +5,34 @@
 </ion-header>
 
 <ion-content>
+	<ion-button 
+	(click)="addInvite()" 
+	color="dark"
+	>Invite</ion-button>
+   
+   <ion-input
+    class="input"
+    autocomplete="off"
+    color= "tertiary"
+    type="text"
+    name="start_time"
+    [(ngModel)]="scheduledTimeStart"
+  ></ion-input>
+  <ion-input
+    class="input"
+    autocomplete="off"
+    color= "primary"
+    type="text"
+    name="end_time"
+    [(ngModel)]="scheduledTimeEnd"
+  ></ion-input>
+  <ion-input
+    class="input"
+    autocomplete="off"
+    color= "secondary"
+    type="text"
+    name="email"
+    [(ngModel)]="reciveEmail"
+  ></ion-input>
 
 </ion-content>
