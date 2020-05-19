@@ -24,8 +24,7 @@
       <ion-item>
         <ion-label position="stacked">Password</ion-label>
         <ion-input autocomplete="off" formControlName="password" type="password" name="password" ></ion-input>
-        <!-- [(ngModel)]="postData.password"  comment-->
-        
+        <!-- [(ngModel)]="postData.password" -->
       </ion-item> 
       <div class="noborder" no-lines
       *ngIf="!loginForm.controls.password.valid && (loginForm.controls.password.dirty || submitAttempt)">
