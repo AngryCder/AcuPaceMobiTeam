@@ -1,38 +1,44 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Notifications</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content>
-	<ion-button 
-	(click)="addInvite()" 
-	color="dark"
-	>Invite</ion-button>
-   
-   <ion-input
-    class="input"
-    autocomplete="off"
-    color= "tertiary"
-    type="text"
-    name="start_time"
-    [(ngModel)]="scheduledTimeStart"
-  ></ion-input>
-  <ion-input
-    class="input"
-    autocomplete="off"
-    color= "primary"
-    type="text"
-    name="end_time"
-    [(ngModel)]="scheduledTimeEnd"
-  ></ion-input>
-  <ion-input
-    class="input"
-    autocomplete="off"
-    color= "secondary"
-    type="text"
-    name="email"
-    [(ngModel)]="reciveEmail"
-  ></ion-input>
-
+<ion-content padding="true">
+  <br>
+  <ion-card>
+    <ion-card-header color="secondary" class="login-card-header">
+      <ion-card-title>Start your first meeting</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <form padding-right [formGroup]="inviteForm">
+        <ion-item lines="inset">
+          <ion-label position="floating">Email</ion-label>
+          <ion-input
+            type="email"
+            class="form-control"
+            placeholder="Please Enter the attendee_email"
+            formControlName="attendee_email"
+          ></ion-input>
+        </ion-item>
+        <ion-item lines="inset">
+          <ion-datetime
+            type="datetime"
+            class="form-control"
+            formControlName="host_meeting_start_time"
+            displayFormat="YYYY-MM-DDTHH:mm:00TZD"
+            placeholder="Enter start time"
+          ></ion-datetime>
+        </ion-item>
+        <ion-item lines="inset">
+          <ion-datetime
+            type="datetime"
+            class="form-control"
+            formControlName="host_meeting_end_time"
+            displayFormat="YYYY-MM-DDTHH:mm:00TZD"
+            placeholder="Enter end time"
+          ></ion-datetime>
+        </ion-item>
+        <ion-item lines="none" class="ion-item-right-margin">
+          <ion-button size="default" slot="end" type="submit" (click)="Invite()"
+            >Invite</ion-button
+          >
+        </ion-item>
+      </form>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
