@@ -1,3 +1,11 @@
+<ion-header>
+     <ion-menu-toggle>
+ <ion-icon name="menu"></ion-icon>
+     </ion-menu-toggle>
+  <ion-toolbar>
+    <ion-title>Notification</ion-title>
+  </ion-toolbar>
+</ion-header>
 <ion-content padding="true">
   <br>
   <ion-card>
@@ -20,7 +28,7 @@
             type="datetime"
             class="form-control"
             formControlName="host_meeting_start_time"
-            displayFormat="YYYY-MM-DDTHH:mm:00TZD"
+            displayFormat="YYYY-MM-DDTHH:mm:00"
             placeholder="Enter start time"
           ></ion-datetime>
         </ion-item>
@@ -41,4 +49,29 @@
       </form>
     </ion-card-content>
   </ion-card>
+<ion-card-header color="secondary" class="login-card-header" >
+  <ion-card-title>You are invited to these meeting</ion-card-title>
+  <ion-item lines="inset"*ngFor="let item of list">
+    <ion-grid>
+  <ion-row>
+    <ion-col>
+      {{item.role}}
+    </ion-col>
+    <ion-col>
+      {{item.host_name}}
+    </ion-col>
+  </ion-row>
+    <ion-row>
+    <ion-col>
+      {{item.room_id}}
+    </ion-col>
+    <ion-col>
+      {{item.meeting}}
+    </ion-col>
+  </ion-row>
+</ion-grid>
+  <ion-button  routerLink="/home/messages" (click)="goTo(item.room_id)">start meet</ion-button>
+  </ion-item>       
+</ion-card-header>         
+
 </ion-content>

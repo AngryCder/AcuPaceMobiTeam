@@ -1,29 +1,32 @@
 import { Component, OnInit } from '@angular/core';
 import { Directive, Renderer2, ElementRef} from '@angular/core';
+import { NavController } from '@ionic/angular';
 import { NotificationService } from './../../services/notification.service';
 import { AuthService } from './../../services/auth.service';
-import { HttpService } from './../../services/http.service';
+import { DataService } from './../../services/data.service';
 import { ReactiveFormsModule } from '@angular/forms'; 
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { FormBuilder, Validators } from '@angular/forms';
 import { FormGroup, FormControl } from '@angular/forms';
-
+import {MessagesPage} from '../messages/messages.page';
 @Component({
   selector: 'app-notifications',
   templateUrl: './notifications.page.html',
   styleUrls: ['./notifications.page.scss'],
 })
 export class NotificationsPage implements OnInit {
- public authUser: any;
+  public authUser: any;
   public inviteForm: FormGroup;
+  public list : any;
   public submitAttempt: boolean = false;
 
   bodystring: any;
   constructor(
-  
+    private renderer: Renderer2,
     public formBuilder: FormBuilder,
     private webservice: NotificationService,
-    private auth: AuthService   
+    private auth: AuthService,
+    public data : DataService    
   ) {
     this.inviteForm = this.formBuilder.group({
       attendee_email: [
@@ -39,12 +42,11 @@ export class NotificationsPage implements OnInit {
       host_meeting_end_time: ['', Validators.compose([Validators.required])],
     });
   }
-  ngOnInit() {  this.auth.userData$.subscribe((res: any) => {
-      this.authUser = res;
+  ngOnInit() {  
+      this.auth.userData$.subscribe((res: any) => {this.authUser = res;console.log(typeof this.authUser);});
       let email = {"attendee_email" : this.authUser.user_email} ;
-      let list = this.webservice.notificationList(email);
-      console.log(list);
-    });}
+      this.webservice.notificationList(email).subscribe((res: any) => {this.list = res.result; console.log(this.list);});
+    }
   Invite() {
     this.submitAttempt = true;
     console.log(this.inviteForm);
@@ -61,22 +63,17 @@ export class NotificationsPage implements OnInit {
           .value,
         attendee_email: this.inviteForm.get('attendee_email').value,
       };
-      console.log(bodystring);
-      this.webservice.AddInvitation(bodystring).then(
-        (response) => {
-          let data = JSON.stringify(response);
-          // this.webservice.showAlert(response);
-          // this.navCtrl.setRoot(LoginPage);
-          console.log('data' + data);
-        },
-        (err) => {
-          console.log('Error' + err);
-        }
-      );
+       console.log(bodystring);
+       this.webservice.AddInvitation(bodystring).subscribe();
     }
     else{
     console.log("error");
     }
   }
+  goTo(channel_name) {
+  this.data.setData(channel_name);
+  console.log(channel_name);
+  }
+
 
 }

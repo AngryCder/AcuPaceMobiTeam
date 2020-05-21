@@ -75,7 +75,7 @@ export class LoginPage implements OnInit {
 
           console.log('login res -> ', res['result']); 
          
-          if(res[0]!='No Record'){
+          if(res['result']!='No Record'){
             // Storing the User data.
             this.storageService
               .store(AuthConstants.AUTH, res.result)

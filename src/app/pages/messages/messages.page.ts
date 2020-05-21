@@ -3,6 +3,7 @@ import { AngularAgoraRtcService, Stream } from 'angular-agora-rtc';
 import { AfterViewInit, ElementRef, ViewChild } from '@angular/core';
 import {Renderer2} from '@angular/core';
 import { CountdownModule } from "ngx-countdown";
+import { DataService } from './../../services/data.service';
 
 @Component({
   selector: 'app-messages',
@@ -13,18 +14,23 @@ export class MessagesPage implements OnInit {
 
  localStream: Stream // Add
  Channel_name: String 
+ subscription : any;
  remoteCalls: any = [];
   @ViewChild('agora_local',{static: false}) private element : ElementRef;
   @ViewChild('remote_calls',{static: false}) private container : ElementRef;
   // Add
   constructor(
-    private agoraService: AngularAgoraRtcService,    private renderer: Renderer2
+    private agoraService: AngularAgoraRtcService,    
+    private renderer: Renderer2,
+     public data : DataService 
   ) {
     this.agoraService.createClient();
   }
 
   // Add
   startCall() {
+  this.Channel_name = this.data.getData();
+  console.log(this.Channel_name);
     this.agoraService.client.join(null, this.Channel_name, null, (uid) => {
       this.localStream = this.agoraService.createStream(uid, true, null, null, true, false);
       this.localStream.setVideoProfile('720p_3');
