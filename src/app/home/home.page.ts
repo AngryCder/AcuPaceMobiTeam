@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { MenuController } from '@ionic/angular'
+import { MenuController } from '@ionic/angular';
+import { AuthService } from './../services/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -8,12 +9,14 @@ import { MenuController } from '@ionic/angular'
 })
 export class HomePage implements OnInit {
 
-  public page_name = "Feed";
-
-  constructor(private menu: MenuController) { }
+  constructor(private menu: MenuController,private auth :AuthService) { }
 
   toggleMenu() {
     this.menu.toggle(); //Add this method to your button click function
+  }
+
+  logoutAction() {
+    this.auth.logout();
   }
 
   ngOnInit() {
