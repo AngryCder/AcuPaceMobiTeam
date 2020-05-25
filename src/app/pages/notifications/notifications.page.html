@@ -1,8 +1,8 @@
 <ion-header>
-     <ion-menu-toggle>
+  <ion-toolbar class="class1">
+    <ion-menu-toggle class="class1">
  <ion-icon name="menu"></ion-icon>
      </ion-menu-toggle>
-  <ion-toolbar>
     <ion-title>Notification</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -24,6 +24,14 @@
           ></ion-input>
         </ion-item>
         <ion-item lines="inset">
+          <ion-label position="floating">channel name</ion-label>
+          <ion-input
+            class="form-control"
+            placeholder="Please Enter the channel_name"
+            formControlName="channel_name"
+          ></ion-input>
+        </ion-item>
+        <ion-item lines="inset">
           <ion-datetime
             type="datetime"
             class="form-control"
@@ -37,7 +45,7 @@
             type="datetime"
             class="form-control"
             formControlName="host_meeting_end_time"
-            displayFormat="YYYY-MM-DDTHH:mm:00TZD"
+            displayFormat="YYYY-MM-DDTHH:mm:00"
             placeholder="Enter end time"
           ></ion-datetime>
         </ion-item>
@@ -51,6 +59,7 @@
   </ion-card>
 <ion-card-header color="secondary" class="login-card-header" >
   <ion-card-title>You are invited to these meeting</ion-card-title>
+  <ion-item><ion-button (click)='refreshList()'>refresh list</ion-button></ion-item>
   <ion-item lines="inset"*ngFor="let item of list">
     <ion-grid>
   <ion-row>
@@ -66,11 +75,11 @@
       {{item.room_id}}
     </ion-col>
     <ion-col>
-      {{item.meeting}}
+      {{item.host_meeting_start_time}}
     </ion-col>
   </ion-row>
 </ion-grid>
-  <ion-button  routerLink="/home/messages" (click)="goTo(item.room_id)">start meet</ion-button>
+  <ion-button  routerLink="/home/messages" (click)="goTo(item.channel_name,item.host_meeting_start_time,item.host_meeting_end_time)">start meet</ion-button>
   </ion-item>       
 </ion-card-header>         
 

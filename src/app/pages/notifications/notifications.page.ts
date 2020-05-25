@@ -7,8 +7,10 @@ import { DataService } from './../../services/data.service';
 import { ReactiveFormsModule } from '@angular/forms'; 
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { FormBuilder, Validators } from '@angular/forms';
+import { ToastService } from './../../services/toast.service';
 import { FormGroup, FormControl } from '@angular/forms';
-import {MessagesPage} from '../messages/messages.page';
+import * as moment from 'moment';
+
 @Component({
   selector: 'app-notifications',
   templateUrl: './notifications.page.html',
@@ -19,13 +21,14 @@ export class NotificationsPage implements OnInit {
   public inviteForm: FormGroup;
   public list : any;
   public submitAttempt: boolean = false;
-
-  bodystring: any;
+  public subscription : any;
+  public bodystring: any;
   constructor(
     private renderer: Renderer2,
     public formBuilder: FormBuilder,
     private webservice: NotificationService,
     private auth: AuthService,
+   private toastService: ToastService,
     public data : DataService    
   ) {
     this.inviteForm = this.formBuilder.group({
@@ -40,12 +43,13 @@ export class NotificationsPage implements OnInit {
       ],
       host_meeting_start_time: ['', Validators.compose([Validators.required])],
       host_meeting_end_time: ['', Validators.compose([Validators.required])],
+      channel_name: ['', Validators.compose([Validators.required])],
     });
   }
   ngOnInit() {  
       this.auth.userData$.subscribe((res: any) => {this.authUser = res;console.log(typeof this.authUser);});
       let email = {"attendee_email" : this.authUser.user_email} ;
-      this.webservice.notificationList(email).subscribe((res: any) => {this.list = res.result; console.log(this.list);});
+      this.subscription =  this.webservice.notificationList(email).subscribe((res: any) => {this.list = res.result; console.log(this.list);});
     }
   Invite() {
     this.submitAttempt = true;
@@ -54,6 +58,8 @@ export class NotificationsPage implements OnInit {
       let bodystring = {
         host_id: this.authUser.ID,
         host_name: this.authUser.name,
+        channel_name:this.inviteForm.get('channel_name')
+          .value,
         host_email: this.authUser.user_email,
         role: 'host',
         host_device_details: "device_name",
@@ -70,9 +76,22 @@ export class NotificationsPage implements OnInit {
     console.log("error");
     }
   }
-  goTo(channel_name) {
+  goTo(channel_name,start_date,end_date) {
+  let now = moment()
+  let date = moment.utc(start_date).local();
+  if(now.isBefore(end_date) && date.isBefore(now.toISOString(true))){
+  this.toastService.presentToast('to activate meeting press start call');
   this.data.setData(channel_name);
   console.log(channel_name);
+  }
+  else{
+  this.toastService.presentToast("time out of bounds");
+  }
+  }
+  refreshList(){
+  this.subscription.unsubscribe();
+  let email = {"attendee_email" : this.authUser.user_email} ;
+  this.subscription =  this.webservice.notificationList(email).subscribe((res: any) => {this.list = res.result; console.log(this.list);});
   }
 
 

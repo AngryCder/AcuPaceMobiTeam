@@ -31,9 +31,25 @@
           <ion-icon name="person-outline" slot="start"> </ion-icon>
           <ion-label>profile</ion-label>
         </ion-item>
-        <ion-item  (click)="logoutAction()">
+        <ion-item (click)="logoutAction()">
           <ion-icon name="person-outline" slot="start"> </ion-icon>
           <ion-label>LogOut </ion-label>
+        </ion-item>
+        <ion-item routerLink="/home/contact-us" (click)="toggleMenu()">
+          <ion-icon name="person-outline" slot="start"> </ion-icon>
+          <ion-label>contact-us</ion-label>
+        </ion-item>
+        <ion-item routerLink="/home/faq" (click)="toggleMenu()">
+          <ion-icon name="person-outline" slot="start"> </ion-icon>
+          <ion-label>faq</ion-label>
+        </ion-item>
+        <ion-item routerLink="/home/tutorial" (click)="toggleMenu()">
+          <ion-icon name="person-outline" slot="start"> </ion-icon>
+          <ion-label>tutorial</ion-label>
+        </ion-item>
+        <ion-item routerLink="/home/about-us" (click)="toggleMenu()">
+          <ion-icon name="person-outline" slot="start"> </ion-icon>
+          <ion-label>about-us</ion-label>
         </ion-item>
       </ion-list>
     </ion-content>

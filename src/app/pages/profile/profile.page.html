@@ -1,17 +1,62 @@
 <ion-header>
-     <ion-menu-toggle>
+  <ion-toolbar>
+  	<ion-menu-toggle class="class1">
  <ion-icon name="menu"></ion-icon>
      </ion-menu-toggle>
-  <ion-toolbar>
     <ion-title>Profile</ion-title>
   </ion-toolbar>
 </ion-header>
 
 
 <ion-content>
-	    <h2> Username : {{ authUser?.name }}</h2>
-	    <h2> Email : {{ authUser?.user_email }}</h2>
-	    <h2> ACC_IP : {{ authUser?.ID }}</h2>
-	    <h2> Mobile.No : {{ authUser?.mobileno }}</h2>
-	    <h2> address : {{ authUser?.address }}</h2>
+	      <ion-card>
+    <ion-card-header color="secondary" class="login-card-header">
+      <ion-card-title>Profile</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <form padding-right [formGroup]="profileForm">
+        <ion-item lines="inset">
+          <ion-label position="floating">password</ion-label>
+          <ion-input
+            type="password"
+            class="form-control"
+            placeholder="password"
+            formControlName="password"
+          ></ion-input>
+        </ion-item>
+          <ion-item lines="inset">
+          <ion-label position="floating">Email</ion-label>
+          <ion-input
+            type="password"
+            class="form-control"
+            placeholder="{{this.authUser?.user_email}}"
+            formControlName="password"
+          ></ion-input>
+        </ion-item>
+         <ion-item lines="inset">
+          <ion-label position="floating">Name</ion-label>
+          <ion-input
+            class="form-control"
+            placeholder="{{this.authUser?.name}}"
+            formControlName="name"
+          ></ion-input>
+        </ion-item>
+         <ion-item lines="inset">
+          <ion-label position="floating">Address</ion-label>
+          <ion-input
+            class="form-control"
+            placeholder="{{this.authUser?.address}}"
+            formControlName="address"
+          ></ion-input>
+        </ion-item>
+
+        <ion-item lines="none" class="ion-item-right-margin">
+          <ion-button size="default" slot="end" type="submit" (click)="refresh()"
+            >refresh</ion-button
+          >
+        </ion-item>
+
+      </form>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

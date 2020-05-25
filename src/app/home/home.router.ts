@@ -70,9 +70,58 @@ const routes: Routes = [
               )
           }
         ]
-      }
-      ,
+      },
+      {
+        path: 'contact-us',
+        children: [
+          {
+            path: '',
+            loadChildren: () =>
+              import('../pages/contact-us/contact-us.module').then(
+                m => m.ContactUsPageModule
+              )
+          }
+        ]
+      },
+      {
+        path: 'tutorial',
+        children: [
+          {
+            path: '',
+            loadChildren: () =>
+              import('../pages/tutorial/tutorial.module').then(
+                m => m.TutorialPageModule
+              )
+          }
+        ]
+      },
 
+      
+      {
+        path: 'about-us',
+        children: [
+          {
+            path: '',
+            loadChildren: () =>
+              import('../pages/about-us/about-us.module').then(
+                m => m.AboutUsPageModule
+              )
+          }
+        ]
+      },
+        
+      {
+        path: 'faq',
+        children: [
+          {
+            path: '',
+            loadChildren: () =>
+              import('../pages/faq/faq.module').then(
+                m => m.FaqPageModule
+              )
+          }
+        ]
+      },
       {
         path: '',
         redirectTo: '/home/feed',
